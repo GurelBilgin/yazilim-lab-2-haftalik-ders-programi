@@ -163,7 +163,7 @@ Orijinal projede MySQL bağlantısı ve Excel üretimi farklı dosyalarda tekrar
 - Komut satırı arayüzü `cli.py` ile ayrı hâle getirildi.
 - MySQL bağlantı desteği opsiyonel olarak `mysql_repository.py` içinde korundu.
 
-## Hazırlayan
+## Hazırlayanlar
 
 - Gürel BİLGİN
 - Gizem YALÇIN
