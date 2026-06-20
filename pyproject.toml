@@ -1,0 +1,30 @@
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "haftalik-ders-programi"
+version = "1.0.0"
+description = "Yazılım Lab II kapsamında haftalık ders programı oluşturma uygulaması"
+requires-python = ">=3.10"
+dependencies = [
+    "openpyxl>=3.1.2"
+]
+authors = [
+    { name = "Gürel Bilgin" }
+]
+
+[project.optional-dependencies]
+mysql = [
+    "mysql-connector-python>=9.0.0"
+]
+
+[project.scripts]
+haftalik-ders-programi = "haftalik_ders_programi.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+haftalik_ders_programi = ["py.typed"]
