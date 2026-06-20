@@ -165,6 +165,7 @@ Orijinal projede MySQL bağlantısı ve Excel üretimi farklı dosyalarda tekrar
 
 ## Hazırlayan
 
-- Gürel Bilgin
-
-Bu proje, Yazılım Lab II dersi kapsamında geliştirilmiştir.
+- Gürel BİLGİN
+- Gizem YALÇIN
+- Berkay ARAS
+- Ali AKSOY
