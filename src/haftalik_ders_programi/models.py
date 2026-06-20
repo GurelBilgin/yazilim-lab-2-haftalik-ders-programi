@@ -1,4 +1,3 @@
-
 from __future__ import annotations
 
 from dataclasses import dataclass
@@ -64,10 +63,14 @@ class ProgramDersi:
 
     @property
     def hucre_metni(self) -> str:
-        """Excel hücresinde gösterilecek metni üretir."""
-        return (
-            f"{self.ders_kodu} - {self.ders_adi}\n"
-            f"Öğretim Üyesi: {self.ogretim_uyesi}\n"
-            f"Derslik: {self.derslik_id}\n"
-            f"Tür: {self.ders_turu}"
-        )
+        """Excel hücresinde gösterilecek metni üretir.
+
+        SQL verilerinde öğretim üyesi alanı geçici olarak "Yönetici" ise bu
+        alan boş kabul edilir ve hücre metnine öğretim üyesi satırı eklenmez.
+        """
+        satirlar = [f"{self.ders_kodu} - {self.ders_adi}"]
+        if self.ogretim_uyesi.strip():
+            satirlar.append(f"Öğretim Üyesi: {self.ogretim_uyesi}")
+        satirlar.append(f"Derslik: {self.derslik_id}")
+        satirlar.append(f"Tür: {self.ders_turu}")
+        return "\n".join(satirlar)

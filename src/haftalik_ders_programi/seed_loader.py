@@ -85,7 +85,7 @@ def build_program_dersleri(
                 bolum_adi=bolum.bolum_adi,
                 donem=ders.donem,
                 sinif=donemden_sinif_bul(ders.donem),
-                ogretim_uyesi=ogretim_uyesi.ad_soyad,
+                ogretim_uyesi="" if ogretim_uyesi.ad_soyad.strip().lower() == "yönetici" else ogretim_uyesi.ad_soyad,
                 derslik_id=ders.derslik_id,
                 ders_turu=ders.ders_turu,
             )

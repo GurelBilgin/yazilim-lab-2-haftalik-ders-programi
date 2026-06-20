@@ -11,7 +11,11 @@ Bu proje, **Yazılım Lab II** dersi kapsamında geliştirilmiş haftalık ders 
 - Yazılım Mühendisliği ve Bilgisayar Mühendisliği için ayrı ders programı oluşturma
 - Ortak dersleri ilgili bölüm programlarına dahil etme
 - Dersleri dönem bilgisine göre 1, 2, 3 ve 4. sınıf sütunlarına yerleştirme
-- Aynı öğretim üyesi ve derslik için aynı zaman diliminde çakışmayı engellemeye çalışma
+- Aynı öğretim üyesi ve derslik için aynı zaman diliminde çakışmayı engelleme
+- Ders saatlerini mümkün olduğunca aynı gün içinde blok hâlinde yerleştirme
+- 3 saatlik dersleri mümkünse arka arkaya 3 saatlik blok olarak planlama
+- Tam blok bulunamazsa dersleri daha düzenli 2+1 veya 2+2 bloklara bölme
+- Öğretim üyesi alanı `Yönetici` olan derslerde öğretim üyesi bilgisini boş bırakma
 - Düzenli ve biçimlendirilmiş Excel çıktısı üretme
 - Komut satırından bölüm bazlı çıktı alma
 - Modüler, okunabilir ve test edilebilir Python proje yapısı
@@ -92,6 +96,22 @@ Python modülü olarak çalıştırmak için:
 python -m haftalik_ders_programi.cli --department ALL
 ```
 
+
+## Ders Programı Oluşturma Mantığı
+
+Program, SQL dump dosyalarından alınan bölüm, ders, derslik ve öğretim üyesi verilerini kullanarak haftalık ders programı oluşturur. Dersler, ait oldukları bölüm ve dönem bilgilerine göre değerlendirilir; dönem bilgisi 1, 2, 3 ve 4. sınıf sütunlarına dönüştürülür.
+
+Ders yerleştirme sırasında aşağıdaki kurallar uygulanır:
+
+- Aynı öğretim üyesi aynı saat aralığında birden fazla derse atanmaz.
+- Aynı derslik aynı saat aralığında birden fazla ders için kullanılmaz.
+- Dersin haftalık saatleri mümkün olduğunca aynı gün içinde arka arkaya yerleştirilir.
+- 3 saatlik dersler için önce 3 saatlik blok aranır. Uygun blok bulunamazsa 2+1 şeklinde daha düzenli bölünmüş yerleşim denenir.
+- 4 saatlik dersler için önce 4 saatlik blok aranır. Uygun blok bulunamazsa 2+2 blok yerleşimi denenir.
+- Öğretim üyesi adı `Yönetici` olarak gelen kayıtlar geçici veri kabul edilir ve Excel çıktısında öğretim üyesi satırı boş bırakılır.
+
+Algoritma kural tabanlı ve sıralı yerleştirme mantığıyla çalışır. Amaç, dersleri rastgele dağıtmak yerine çakışmasız, okunabilir ve mümkün olduğunca blok yapıda bir haftalık program üretmektir.
+
 ## Giriş Dosyaları
 
 Program varsayılan olarak `sql/` klasöründeki MySQL dump dosyalarını kullanır:
@@ -137,13 +157,14 @@ Orijinal projede MySQL bağlantısı ve Excel üretimi farklı dosyalarda tekrar
 - Veri modelleri `models.py` dosyasına ayrıldı.
 - SQL dump okuma işlemleri `seed_loader.py` dosyasına alındı.
 - Program oluşturma algoritması `scheduler.py` dosyasında toplandı.
+- Dersler mümkün olduğunca blok hâlinde yerleştirilecek şekilde zamanlama mantığı geliştirildi.
+- `Yönetici` olarak görünen öğretim üyesi kayıtları Excel çıktısında boş bırakılacak şekilde düzenlendi.
 - Excel çıktısı üretimi `excel_exporter.py` dosyasına taşındı.
 - Komut satırı arayüzü `cli.py` ile ayrı hâle getirildi.
 - MySQL bağlantı desteği opsiyonel olarak `mysql_repository.py` içinde korundu.
 
-## Hazırlayanlar
+## Hazırlayan
 
-- Gürel BİLGİN
-- Gizem YALÇIN
-- Berkay ARAS
-- Ali AKSOY
+- Gürel Bilgin
+
+Bu proje, Yazılım Lab II dersi kapsamında geliştirilmiştir.
